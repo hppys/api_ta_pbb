@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import hotelRoutes from "./routes/hotelRoutes.js";
+import flightRoutes from "./routes/flightRoutes.js"; // <-- IMPORT BARU
+import rentalRoutes from "./routes/rentalRoutes.js"; // <-- IMPORT BARU
 
 dotenv.config();
 
@@ -10,7 +12,7 @@ const app = express();
 // Tambahkan CORS
 app.use(
   cors({
-    origin: "*", // atau "http://localhost:5173" saja
+    origin: "http://localhost:5173", // ubah jika frontend kamu Vite
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -24,6 +26,18 @@ app.get("/", (req, res) => {
 });
 
 // API routes
+// Route Hotel yang sudah ada
 app.use("/api/hotels", hotelRoutes);
 
-export default app;
+// Route Flights BARU
+// Endpoint: /api/flights
+app.use("/api/flights", flightRoutes);
+
+// Route Rentals BARU
+// Endpoint: /api/rentals
+app.use("/api/rentals", rentalRoutes);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});

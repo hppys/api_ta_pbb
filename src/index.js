@@ -7,9 +7,13 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// Base route
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+// API routes
 app.use("/api/hotels", hotelRoutes);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// ❗ WAJIB untuk Vercel: export default, BUKAN listen()
+export default app;

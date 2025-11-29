@@ -12,7 +12,7 @@ const app = express();
 // Tambahkan CORS
 app.use(
   cors({
-    origin: "http://localhost:5173", // ubah jika frontend kamu Vite
+    origin: "*", // ubah jika frontend kamu Vite
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
